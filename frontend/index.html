@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResumeAI — AI-Powered Resume Analysis</title>
+  <meta name="description" content="Upload your resume and get instant AI-powered feedback: score, ATS compatibility, strengths, weaknesses, keyword gaps, and rewrite suggestions powered by Llama 3." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Ambient Background ──────────────────────────────────── -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <!-- ── Header ──────────────────────────────────────────────── -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon">⚡</div>
+        <span class="logo-text">ResumeAI</span>
+      </div>
+      <nav class="header-nav">
+        <a href="#upload-section" class="nav-link">Analyze</a>
+        <span class="badge">Powered by Llama 3</span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ── Hero ────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-eyebrow">
+      <span></span> AI Resume Intelligence
+    </div>
+    <h1 class="hero-title">
+      Land More Interviews<br />
+      <span class="line-2">With Smarter Resumes</span>
+    </h1>
+    <p class="hero-desc">
+      Upload your resume and get an instant AI-powered score, ATS compatibility check,
+      keyword gaps, and actionable rewrite suggestions — in seconds.
+    </p>
+    <div class="hero-actions">
+      <a href="#upload-section" class="hero-cta">
+        Analyze My Resume
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <div class="hero-stat">
+        <span class="hero-stat-dot"></span>
+        AI-Powered · Instant Results
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Main Content ─────────────────────────────────────────── -->
+  <main class="main-content">
+
+    <!-- ── Upload Section ──────────────────────────────────────── -->
+    <section id="upload-section" class="card upload-card">
+      <div class="card-header">
+        <h2>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Upload Your Resume
+        </h2>
+        <p>PDF or DOCX accepted — we'll extract the text and run a full AI analysis</p>
+      </div>
+
+      <div id="drop-zone" class="drop-zone" role="button" tabindex="0" aria-label="Upload resume file">
+        <div class="drop-zone-inner">
+          <div class="drop-icon">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <p class="drop-title">Drag & drop your resume here</p>
+          <p class="drop-sub">or click to browse files</p>
+          <span class="drop-formats">PDF · DOCX · up to 10 MB</span>
+        </div>
+        <input type="file" id="resume-file" accept=".pdf,.docx,.doc" hidden />
+      </div>
+
+      <div id="file-selected" class="file-selected hidden">
+        <span class="file-icon">📄</span>
+        <span id="file-name" class="file-name">No file selected</span>
+        <button id="clear-file" class="btn-icon" title="Remove file" aria-label="Remove file">✕</button>
+      </div>
+
+      <div class="user-id-row">
+        <label for="user-id-input" class="label">User ID <span style="text-transform:none;font-weight:400;color:var(--text-3)">(optional)</span></label>
+        <input type="text" id="user-id-input" class="input" placeholder="e.g. john_doe" />
+      </div>
+
+      <!-- ── JD Match ─────────────────────────────────────────── -->
+      <div class="jd-section">
+        <div class="jd-toggle-row">
+          <label class="toggle-label" for="jd-toggle">
+            <span>Match against a Job Description</span>
+            <span class="toggle-badge">Optional</span>
+          </label>
+          <label class="switch" aria-label="Toggle JD match">
+            <input type="checkbox" id="jd-toggle" />
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div id="jd-input-area" class="jd-input-area hidden">
+          <textarea
+            id="jd-textarea"
+            class="textarea"
+            rows="6"
+            placeholder="Paste the full job description here…"
+            aria-label="Job description"
+          ></textarea>
+        </div>
+      </div>
+
+      <button id="analyze-btn" class="btn btn-primary btn-full" disabled>
+        <span class="btn-text">Analyze Resume</span>
+        <span class="btn-loader hidden">
+          <span class="spinner"></span> Analyzing…
+        </span>
+      </button>
+
+      <div id="error-banner" class="error-banner hidden" role="alert"></div>
+    </section>
+
+    <!-- ── Results Section ──────────────────────────────────────── -->
+    <section id="results-section" class="results-section hidden">
+
+      <!-- Score Hero -->
+      <div class="score-hero card">
+        <div class="score-ring-wrapper">
+          <svg class="score-ring" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ring-bg" cx="60" cy="60" r="52" />
+            <circle id="ring-fill" class="ring-fill" cx="60" cy="60" r="52"
+              stroke-dasharray="327" stroke-dashoffset="327" />
+          </svg>
+          <div class="score-center">
+            <span id="score-number" class="score-number">0</span>
+            <span class="score-label">/ 100</span>
+          </div>
+        </div>
+        <div class="score-meta">
+          <h2 class="score-title">Resume Score</h2>
+          <div id="ats-badge" class="ats-badge">ATS: —</div>
+          <p id="score-verdict" class="score-verdict">—</p>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs-wrapper">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="strengths" role="tab" id="tab-strengths">✅ Strengths</button>
+          <button class="tab" data-tab="weaknesses" role="tab" id="tab-weaknesses">⚠️ Weaknesses</button>
+          <button class="tab" data-tab="keywords" role="tab" id="tab-keywords">🔑 Keywords</button>
+          <button class="tab" data-tab="rewrites" role="tab" id="tab-rewrites">✍️ Rewrites</button>
+          <button class="tab" id="tab-match" data-tab="match" role="tab" style="display:none">🎯 JD Match</button>
+        </div>
+
+        <!-- Strengths -->
+        <div id="panel-strengths" class="tab-panel active" role="tabpanel">
+          <ul id="strengths-list" class="feedback-list strengths"></ul>
+        </div>
+
+        <!-- Weaknesses -->
+        <div id="panel-weaknesses" class="tab-panel" role="tabpanel">
+          <ul id="weaknesses-list" class="feedback-list weaknesses"></ul>
+        </div>
+
+        <!-- Missing Keywords -->
+        <div id="panel-keywords" class="tab-panel" role="tabpanel">
+          <p class="panel-intro">Add these keywords to improve your ATS compatibility score:</p>
+          <div id="keywords-container" class="keyword-chips"></div>
+        </div>
+
+        <!-- Suggested Rewrites -->
+        <div id="panel-rewrites" class="tab-panel" role="tabpanel">
+          <p class="panel-intro">Upgrade these bullet points for maximum impact:</p>
+          <div id="rewrites-container" class="rewrites-list"></div>
+        </div>
+
+        <!-- JD Match -->
+        <div id="panel-match" class="tab-panel" role="tabpanel">
+          <div class="match-score-row">
+            <div class="match-meter-wrapper">
+              <div class="match-label-row">
+                <span>Resume–JD Match Score</span>
+                <span id="match-pct-label" class="match-pct">0%</span>
+              </div>
+              <div class="match-bar-track">
+                <div id="match-bar" class="match-bar" style="width:0%"></div>
+              </div>
+            </div>
+          </div>
+          <p id="match-explanation" class="match-explanation"></p>
+          <div class="match-kw-grid">
+            <div>
+              <h4 class="kw-section-title match-good">✅ Matched Keywords</h4>
+              <div id="matched-keywords" class="keyword-chips"></div>
+            </div>
+            <div>
+              <h4 class="kw-section-title match-bad">❌ Missing Keywords</h4>
+              <div id="missing-match-keywords" class="keyword-chips"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button id="reset-btn" class="btn btn-secondary btn-full">
+        ← Analyze Another Resume
+      </button>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>Built with <a href="https://fastapi.tiangolo.com" target="_blank">FastAPI</a> · <a href="https://groq.com" target="_blank">Groq Llama 3</a> · <a href="https://www.mongodb.com/atlas" target="_blank">MongoDB Atlas</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

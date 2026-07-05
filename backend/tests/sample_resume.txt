@@ -1,0 +1,37 @@
+Jane Smith
+Senior Software Engineer | jane.smith@email.com | linkedin.com/in/janesmith | github.com/janesmith
+
+PROFESSIONAL SUMMARY
+Results-driven Senior Software Engineer with 7 years of experience designing and shipping
+scalable distributed systems. Led teams of 5-10 engineers, reduced API latency by 40%,
+and improved deployment frequency from monthly to daily using CI/CD pipelines.
+Passionate about clean architecture, test-driven development, and mentoring junior engineers.
+
+EXPERIENCE
+
+Senior Software Engineer — Acme Corp (2020–Present)
+• Architected a microservices platform handling 2M+ daily requests using Python, FastAPI, and Kubernetes
+• Reduced database query time by 60% through indexing optimization and query refactoring in PostgreSQL
+• Led migration from monolith to microservices, cutting release cycle from 4 weeks to 3 days
+• Mentored 4 junior engineers; 3 received promotions within 18 months
+• Implemented real-time event streaming with Apache Kafka, processing 500K events/hour
+
+Software Engineer — Beta Startup (2018–2020)
+• Built REST APIs in Python (Flask) serving 100K daily active users
+• Automated infrastructure provisioning with Terraform and AWS CloudFormation
+• Improved test coverage from 45% to 92%, reducing production bugs by 70%
+
+EDUCATION
+B.S. Computer Science — State University (2018)
+Relevant Coursework: Algorithms, Distributed Systems, Machine Learning, Database Design
+
+SKILLS
+Languages: Python, Go, TypeScript, SQL
+Frameworks: FastAPI, Flask, React, Node.js
+Infrastructure: AWS, GCP, Docker, Kubernetes, Terraform
+Databases: PostgreSQL, MongoDB, Redis, Elasticsearch
+Tools: Git, GitHub Actions, Jenkins, Grafana, DataDog
+
+CERTIFICATIONS
+• AWS Certified Solutions Architect – Associate (2022)
+• Certified Kubernetes Administrator (CKA) (2023)
